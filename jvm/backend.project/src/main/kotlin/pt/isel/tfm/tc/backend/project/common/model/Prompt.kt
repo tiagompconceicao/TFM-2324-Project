@@ -1,6 +1,8 @@
 package pt.isel.tfm.tc.backend.project.common.model
 
+import java.util.*
+
 data class Prompt(
-        var id: Int,
+        var date: Date,
         var text: String
 ) { }
