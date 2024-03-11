@@ -4,6 +4,7 @@ target/
 !**/src/main/**/target/
 !**/src/test/**/target/
 src/main/resources/application.properties
+tfm-2324-project-firebase-adminsdk-fognk-176b5a82d5.json
 
 ### STS ###
 .apt_generated
