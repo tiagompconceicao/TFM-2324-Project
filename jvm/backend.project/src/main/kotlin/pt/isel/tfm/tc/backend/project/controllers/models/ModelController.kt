@@ -3,16 +3,14 @@ package pt.isel.tfm.tc.backend.project.controllers.models;
 import org.springframework.http.MediaType
 import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
-import org.springframework.web.client.RestClient
 import pt.isel.tfm.tc.backend.project.common.MODELS_PATH
-import pt.isel.tfm.tc.backend.project.common.data.ModelData
+import pt.isel.tfm.tc.backend.project.common.service.ModelService
 import pt.isel.tfm.tc.backend.project.common.data.PromptData
-import pt.isel.tfm.tc.backend.project.common.model.Prompt
 
 
 @RestController
 @RequestMapping(MODELS_PATH)
-public class ModelController(private val modelData:ModelData, private val promptData: PromptData ) {
+public class ModelController(private val modelService: ModelService, private val promptData: PromptData ) {
     /* TODO
      * Develop IModelData and ModelData (import code to communicate with Firestore and perform http requests)
      * Ask model to execute a prompt: POST
@@ -58,7 +56,7 @@ public class ModelController(private val modelData:ModelData, private val prompt
             @RequestBody prompt: PromptInputModel,
             @PathVariable modelName: String
     ): ResponseEntity<String> {
-        val response = modelData.execPrompt(modelName,prompt.text)
+        val response = modelService.execPrompt(modelName,prompt.text,prompt.type)
         return ResponseEntity
                 .ok()
                 .contentType(MediaType.parseMediaType("application/json"))

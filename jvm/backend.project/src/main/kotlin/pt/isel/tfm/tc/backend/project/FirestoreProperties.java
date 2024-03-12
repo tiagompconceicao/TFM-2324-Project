@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.io.FileInputStream;
 import java.io.IOException;
 
-@Service
+
 public class FirestoreProperties {
 
     public static FirebaseApp init() throws IOException {
