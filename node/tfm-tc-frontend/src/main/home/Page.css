@@ -1,0 +1,655 @@
+:root {
+    --blue-primary-color: #0d6efd; 
+    --blue-secondary-color: #DAE8FC; 
+    --dark-primary-color: #393B3D; 
+    --dark-secondary-color: #000000; 
+    --background-color:#202020;
+  }
+  
+  body {
+      margin: 0;
+      padding: 0;
+      height: 100%;
+      font-family: 'Poppins', sans-serif;
+  }
+
+  .container {
+      display: flex;
+      height: 100vh;
+      background-color:var(--background-color)
+  }
+  
+  .newChatButton {
+    cursor: pointer;
+    width: 210px;
+    height: 45px;
+    padding: 0px 8px;
+    border: 1px solid var(--blue-primary-color);
+    box-sizing: border-box;
+    border-radius: 11px;
+    background-color: var(--blue-primary-color);
+    color: #ffffff;
+    font-size: 16px;
+    font-family: "Work Sans";
+    font-weight: 700;
+    line-height: 20px;
+    outline: none;
+    margin-top:20px;
+    margin-left: 15px;
+  }
+
+  .newChatButton:hover{
+    background-color: #0a58ca;
+    border-color: #0a58ca;
+  }
+  
+  .card {
+    left: 0px;
+    width: 240px;
+    height: 240px;
+    background-color: #393b3d;
+    border-radius: 7px;
+    border: 1px solid #706c82;
+    box-sizing: border-box;
+    margin-top:20px;
+  }
+  
+  .previousPromptsTitle {
+    width: 140px;
+    height: 32px;
+    padding: 5px 8px;
+    border: 0;
+    box-sizing: border-box;
+    border-radius: 6px;
+    background-color: var(--blue-primary-color);
+    color: #ffffff;
+    font-size: 14px;
+    line-height: 22px;
+    outline: none;
+  }
+  
+  .promptsCardDiv{
+    margin-top:20px;
+    margin-left:10px;
+  }
+
+  .promptsCardDiv::-webkit-scrollbar {
+    width: 10px;
+  }
+  
+  .promptsCardDiv::-webkit-scrollbar-track {
+    background: #393b3d;
+  }
+  
+  .promptsCardDiv::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  .promptsCardDiv::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+  
+  .promptCard {
+    top: 238px;
+    left: 9px;
+    width: 210px;
+    height: 37px;
+    background-color: #393b3d;
+    color: #ffffff;
+    border-radius: 7px;
+    border: 1px solid #706c82;
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    cursor: pointer;
+  }
+
+  .promptCard-selected{
+    background: #555;
+  }
+
+  .promptCard:hover {
+    background: #555;
+  }
+
+  .popup-services{
+    overflow: visible;
+    position:absolute;
+    width: 210px;
+    height: 100px;
+    margin-top: -145px;
+    background-color: #b0c7ef;
+    border-radius: 8px;
+  }
+  
+  .userButton {
+    cursor: pointer;
+    width: 210px;
+    height: 45px;
+    padding: 0px 8px;
+    border: 1px solid var(--blue-primary-color);
+    box-sizing: border-box;
+    border-radius: 11px;
+    background-color: var(--blue-primary-color);
+    color: #ffffff;
+    font-size: 16px;
+    font-family: "Work Sans";
+    font-weight: 700;
+    line-height: 20px;
+    outline: none;
+    margin-top:40px;
+    margin-left:15px;
+  }
+
+  .userButton:hover{
+    background-color: #0a58ca;
+    border-color: #0a58ca;
+  }
+
+  .content{
+    position: relative;
+    width: 100%; /* Ensure the content div stretches to the full width */
+  }
+
+  /* Model Picker begin */
+
+  .modelPickerDiv{
+    position: relative;
+    
+    width: 100%;
+  }
+  
+  .modelPicker {
+    outline: none;
+    position: relative;
+    background-color: var(--background-color);
+    height: 27px;
+    padding: 0px 8px;
+    border: 1px solid #838780;
+    box-sizing: border-box;
+    border-radius: 11px;
+    color: white;
+    font-size: 20px;
+    font-family: "Work Sans";
+    margin-top:20px;
+    margin-right:20px;
+    margin-left: auto;
+    float:right
+  }
+
+  /* Model Picker END */
+
+  /* Begin CSS Main Content Default */
+
+  .Welcome{
+    border-radius: 11px;
+    color: #ffffff;
+    font-size: 26px;
+    font-family: "Work Sans";
+    margin-top: 100px;
+    text-align:center;
+  }
+
+  .emptyDiv{
+    margin-top: 580px;
+  }
+
+  .SuggestionsDiv{
+    display: grid; /* Use CSS grid */
+    height: 411px;
+    grid-template-columns: 1fr 1fr;  /*Two equal-width columns */
+    justify-items: center; /* Align grid items horizontally in the center */
+    align-items: center; /* Align grid items vertically in the center */
+    margin-top: 30px;
+    grid-gap: 10px; /* Adjust the gap between grid items */ 
+  }
+
+  .SuggestionBigCard1 {
+    width: 400px;
+    height: 320px;
+    margin-left: 100px;
+    background-color: var(--blue-primary-color);
+    border-radius: 8px;
+  }
+
+  .SuggestionBigCard2 {
+    width: 400px;
+    height: 320px;
+    margin-right: 100px;
+    background-color: var(--blue-primary-color);
+    border-radius: 8px;
+  }
+  
+  .SuggestionTitleText {
+    color: #ffffff;
+    font-size: 33px;
+    font-family: "Work Sans";
+    font-weight: 500;
+    line-height: 47px;
+    padding-left: 40px;
+    padding-top: 20px;
+  }
+  
+  .SuggestionSmallCards{
+    padding-left: 40px;
+    padding-top: 30px;
+  }
+  
+  .SuggestionSmallCardButton {
+    width: 320px;
+    height: 60px;
+    background-color: #dae8fc;
+    border-radius: 10px;
+    border: 1px solid #6e8fc0;
+    box-sizing: border-box;
+    margin-bottom: 10px;
+    cursor: pointer;
+    animation: fadeInUp 1s ease-out;
+  }
+
+  .SuggestionSmallCardButton:hover {
+    background-color: #b0c7ef !important;
+  }
+
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .SuggestionSmallCardButton:hover {
+    background-color: var(--blue-secondary-color)
+  }
+
+  .send-prompt-container {
+    display: flex;
+    align-items: center;
+    place-items: center;
+    width: 1020px;
+    margin: 0 auto; /* Center the container horizontally */
+    margin-top: 45px;
+  }
+  
+  .prompt-input {
+    flex: 1;
+    height: 45px;
+    border: 1px solid #706c82;
+    background-color: #393b3d;
+    border-radius: 8px;
+    text-indent: 10px; /* Adjust as needed */
+  }
+
+  /* Style placeholder text */
+.prompt-input::placeholder {
+    color: #706c82; /* Placeholder text color */
+    text-indent: 10px; /* Adjust as needed */
+  }
+  
+  /* Style input text when focused */
+  .prompt-input:focus {
+    color: #ccc;/* Input text color */
+    outline: none;
+  }
+  
+  .send-prompt-button {
+    margin-left: -25px;
+    cursor: pointer;
+  }
+
+  /* End CSS Main Content Default */
+
+  /* Begin CSS Chat*/
+
+  .chat-outer-container {
+    width: 100%;
+    height: 500px;
+    margin: 20px auto;
+    margin-top: 80px;
+    padding: 20px;
+    border: 1px solid var(--background-color);
+    border-radius: 5px;
+    background-color: var(--background-color);
+    overflow-y: auto;
+    overflow-x: hidden; /* Hide horizontal scrollbar */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .chat-outer-container::-webkit-scrollbar {
+    width: 10px;
+    height: 10px; /* Adjust scrollbar height */
+  }
+  
+  .chat-outer-container::-webkit-scrollbar-track {
+    background: #393b3d;
+  }
+  
+  .chat-outer-container::-webkit-scrollbar-thumb {
+    background: #888;
+  }
+  
+  .chat-outer-container::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .chat-container {
+    align-self: center;
+    width: 65%;
+    height: 100%;
+    border: 1px solid var(--background-color);
+    border-radius: 5px;
+    background-color: var(--background-color);
+  }
+
+  
+  
+  .chat-message {
+    margin-bottom: 10px;
+    border-radius: 5px;
+  }
+  
+  .chat-sender {
+    color: white;
+    align-self: flex-end;
+  }
+  .chat-receiver {
+    color: white;
+    align-self: flex-start;
+  }
+  .chat-message-info {
+    display: flex;
+    align-items: center;
+  }
+  .chat-icon {
+    margin-left: 5px;
+  }
+  .chat-username {
+    font-weight: bold;
+    margin-left: 5px;
+    margin-top: 5px;
+  }
+  .chat-message-content {
+    margin-top: 5px;
+    margin-left: 35px;
+    margin-bottom: 20px;
+    word-wrap: break-word;
+    }
+
+    .markdown-paragraph {
+      background-color: var(--background-color);
+    }
+    
+    .markdown-code-div {
+      width: 100%;
+      background-color: #1e1e1e; /* Changed to darker color */
+      border-radius: 8px;
+      border: 1px solid #393B3D; /* Added border */
+    }
+    
+    .markdown-title-div {
+      display: flex;
+      width: 100%; 
+      border-radius: 8px 8px 0 0; /* Added for better appearance */
+      background-color: #393B3D;
+      height: 40px;
+      align-items: center;
+      justify-content: space-between;
+    }
+    
+    .markdown-title {
+      margin-left: 15px;
+      color: white; /* Added text color */
+    }
+
+    .launch-service-button{
+      position: relative;
+      cursor: pointer;
+      width: 140px;
+      height: 30px;
+      border: 1px solid #393B3D;
+      box-sizing: border-box;
+      border-radius: 8px;
+      background-color: #393B3D;
+      color: #ffffff;
+      justify-self:right; 
+    }
+
+    .launch-service-button:hover{
+      background: #555;
+    }
+    
+    .markdown-code-paragraph {
+      display: block;
+      position: relative;
+      line-height: 1.6;
+      background-color: #1e1e1e; /* Changed to darker color */
+      color: white;
+      padding: 1px; /* Added padding */
+      border-radius: 0 0 8px 8px; /* Added for better appearance */
+      margin-left: 15px;
+      margin-top: 10px;
+      margin-bottom: 15px;
+    }
+
+    .markdown-code-inner-div{
+      overflow-x: auto;
+    }
+    .markdown-code-inner-div::-webkit-scrollbar {
+      width: 10px;
+      height: 10px;
+      margin-top: 15px;
+    }
+    
+    .markdown-code-inner-div::-webkit-scrollbar-track {
+      background: #393b3d;
+    }
+    
+    .markdown-code-inner-div::-webkit-scrollbar-thumb {
+      background: #888;
+    }
+    
+    .markdown-code-inner-div::-webkit-scrollbar-thumb:hover {
+      background: #555;
+    }
+    
+    .language-javascript,
+    .language-html {
+      background-color: #2d2d2d; /* Changed to a darker color */
+      padding: 10px;
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    
+    .language-python {
+      color: white;
+    }
+
+  .hljs-keyword{
+    color: #0086b3 !important;
+    font-weight: bold;
+  }
+
+
+  .loading-animation {
+    border: 4px solid rgba(0, 0, 0, 0.1);
+    border-left-color: #3498db;
+    border-radius: 50%;
+    margin-left:40%;
+    margin-top:20%;
+    width: 50px;
+    height: 50px;
+    animation: spin 1s linear infinite;
+  }
+  
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /*End CSS Chat*/
+
+
+  .ContainerDiv {
+    height: 500px;
+    justify-items: center; /* Align grid items horizontally in the center */
+    align-items: center; /* Align grid items vertically in the center */
+    margin-top: 85px;
+    margin-left: 40px;
+  }
+
+  .ContainerBigCard {
+    width: 1028px;
+    height: 500px;
+    margin-left: 100px;
+    background-color: #393b3d;
+    border-radius: 7px;
+    border: 1px solid #706c82;
+    border-radius: 8px;
+  }
+
+  .container-div {
+    display: flex;
+    justify-content: space-between; /* Aligns items to the edges */
+    align-items: center;
+    padding: 10px;
+    border-radius: 8px;
+    color: white;
+  }
+  
+  .left-div {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .left-span-container {
+    display: flex; /* Arrange behind and main text horizontally */
+    align-items: center; /* Vertically center align items */
+    margin-bottom: 5px; /* Space between span containers */
+    font-size: small;
+  }
+  
+  .behind-left-text {
+    color: white; /* Ensure text is readable */
+    font-size: 14px; /* Slightly smaller font size */
+    margin-right: 10px; /* Space between behind text and main text */
+  }
+  
+  .left-span {
+    color: #b0b0b0; /* Lighter color for background text */
+    
+  }
+  
+  .status-div {
+    display: flex;
+    align-items: center;
+  }
+  
+  .status-text-group {
+    display: flex;
+    flex-direction: column;
+    margin-right: 30px; /* Space between status text and buttons */
+  }
+  
+  .status-text {
+    margin-right: 0; /* Remove right margin since elements are stacked vertically */
+  }
+  
+  .status-bold {
+    font-weight: bold;
+  }
+  
+  .button-group {
+    display: flex;
+  }
+  
+  .button-group button {
+    margin: 0; /* Remove any space between the buttons */
+  }
+  
+  .status-button {
+    padding: 5px 10px;
+    border: 1px solid #0a58ca; /* Updated border color */
+    background: #0d6efd; /* Updated background color */
+    cursor: pointer;
+    font-size: 16px;
+    color: white;
+  }
+
+  .status-button:hover{
+    background-color: #0a58ca;
+    border-color: #0a58ca;
+  }
+  
+  .status-button-stop {
+    border-top-left-radius: 4px;
+    border-bottom-left-radius: 4px;
+  }
+  
+  .status-button-start {
+    border-top-right-radius: 4px;
+    border-bottom-right-radius: 4px;
+  }
+
+  
+  /*
+    Loading Text Animation
+  */
+
+  .loader-container {
+    display: flex;
+    margin: 50px;
+    height: 10vh;
+}
+
+.bouncing-dots {
+    display: flex;
+    justify-content: space-between;
+    width: 60px;
+}
+
+.dot {
+    width: 15px;
+    height: 15px;
+    background-color: var(--blue-primary-color);
+    border-radius: 50%;
+    animation: bounce 1.5s infinite;
+}
+
+.dot:nth-child(1) {
+    animation-delay: 0s;
+}
+
+.dot:nth-child(2) {
+    animation-delay: 0.3s;
+}
+
+.dot:nth-child(3) {
+    animation-delay: 0.6s;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-20px);
+    }
+}
+  
+/*
+Disable href due to Container inactive
+*/
+  
+.disabled-link {
+  pointer-events: none;
+  color: gray;
+  cursor: default;
+  text-decoration: none;
+}
+  
