@@ -3,7 +3,6 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-src/main/resources/application.properties
 jvm/backend.project/src/main/resources/application.propertiesg
 tfm-2324-project-firebase-adminsdk-fognk-8e4a1b2950.json
 jvm/backend.project/tfm-2324-project-firebase-adminsdk-fognk-8e4a1b2950.json

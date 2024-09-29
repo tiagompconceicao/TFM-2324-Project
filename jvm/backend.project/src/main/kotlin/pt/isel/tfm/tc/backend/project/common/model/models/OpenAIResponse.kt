@@ -6,7 +6,7 @@ data class OpenAIResponse(
         val created : Int = 0,
         val model : String = "",
         val choices: Array<ChoicesModel> = arrayOf(),
-        val usage: UsageModel = UsageModel(0,0,0),
+        val usage: UsageModel = UsageModel(0,0,0,CompletionTokens(0)),
         val system_fingerprint : String? = "null",
 ): ModelResponse() {}
 
@@ -21,4 +21,9 @@ data class UsageModel(
     val prompt_tokens: Int,
     val completion_tokens: Int,
     val total_tokens: Int,
+    val completion_tokens_details: CompletionTokens
+){}
+
+data class CompletionTokens(
+        val reasoning_tokens: Int
 ){}
