@@ -9,6 +9,9 @@ import pt.isel.tfm.tc.backend.project.common.model.models.ModelRequest
 class ModelService() {
     private val client = RestClient.create()
 
+    /**
+     * Generic method to send HTTP request to the LLM web API
+     */
     fun execPrompt(message: ModelRequest): String? {
         val modelAPI = client.post()
                 .uri(message.modelAPI.getUrl())

@@ -55,7 +55,7 @@ class Application(
 	fun firebaseAuth(): FirebaseAuth {
 		return FirebaseAuth.getInstance(initFirebase())
 	}
-
+	
 	override fun addInterceptors(registry: InterceptorRegistry) {
 		registry.addInterceptor(AccessControlInterceptor(PromptData(initFirestore())))
 	}

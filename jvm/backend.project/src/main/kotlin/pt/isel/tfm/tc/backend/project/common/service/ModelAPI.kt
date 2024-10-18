@@ -6,6 +6,9 @@ import pt.isel.tfm.tc.backend.project.ConfigProperties
 import pt.isel.tfm.tc.backend.project.common.model.*
 import pt.isel.tfm.tc.backend.project.common.model.models.*
 
+/**
+ * This enum class stands to normalize and abstract the LLMs API to the Controllers
+ */
 enum class ModelAPI() {
     GPT {
         override fun getUrl() = "https://api.openai.com/v1/chat/completions"
@@ -33,8 +36,8 @@ enum class ModelAPI() {
             headerList.add(Pair("anthropic-version","2023-06-01"))
             return headerList
         }
+        //TODO: Automatic update of the most recent model??
         override fun buildBody(modelName: String, messages: List<Message>) = ClaudeModelMessage("claude-3-opus-20240229",messages,1024)
-        //override fun getOutputModelName(): String = "pt.isel.tfm.tc.backend.project.common.model.ClaudeResponse"
         override fun getOutputModel(json: String): ModelResponse {
             val mapper = jacksonObjectMapper()
             return mapper.readValue(json, ClaudeResponse::class.java)
@@ -52,6 +55,9 @@ enum class ModelAPI() {
     abstract fun getOutputModel(json: String): ModelResponse
     abstract fun parseResults(results: ModelResponse): String
 
+    /**
+     * Method used to build the response of a model
+     */
     @Throws(Exception::class)
     fun parseOutput(chatId: String,modelResult: String, promptType: PromptType): OutputModel {
         val modelContent = parseResults(getOutputModel(modelResult))
@@ -65,6 +71,9 @@ enum class ModelAPI() {
         return OutputModel(id = chatId,contents = contents)
     }
 
+    /**
+     * Method used to detect and extract a Dockerfile in a given string.
+     */
     private fun detectDockerfile(text: String): String {
 
         val splits = text.split("```")

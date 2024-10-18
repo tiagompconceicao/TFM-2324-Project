@@ -9,6 +9,8 @@ import pt.isel.tfm.tc.backend.project.common.data.PromptData
 
 /**
  * This is an interceptor that verifies if a resource access can be performed by the current user.
+ * Checks if the client owns the chat that is trying to access
+ * TODO: Add similar flow for the Services
  */
 class AccessControlInterceptor(private val promptData: PromptData) : HandlerInterceptor {
 

@@ -25,9 +25,6 @@ import java.util.zip.*
 @RestController
 @RequestMapping(SERVICES_PATH)
 public class ServiceController(private val promptData: PromptData, private val dockerService: DockerService) {
-    /*TODO
-     * Start/Stop containers (ensure that only the owner of the container controls it)
-     */
 
     @ExceptionHandler(Exception::class)
     fun handleException(ex:Exception): ResponseEntity<String> {
@@ -35,6 +32,10 @@ public class ServiceController(private val promptData: PromptData, private val d
                 .status(500)
                 .body(ex.message)
     }
+
+    /**
+     * Obtain all containers created by the user
+     */
 
     @GetMapping
     fun getContainers(
@@ -50,18 +51,12 @@ public class ServiceController(private val promptData: PromptData, private val d
                 .ok()
                 .contentType(MediaType.parseMediaType("application/json"))
                 .body(containers)
-
-
-
-        /*
-        return ResponseEntity
-                .ok()
-                .contentType(MediaType.parseMediaType("application/json"))
-                .body(dockerService.getContainer("5694ee7ba1df2781fa4d4274a78680debe7a89e738e3a849d9a7136845f7a30e"))
-
-         */
     }
 
+
+    /**
+     * Obtain a specific container
+     */
     @GetMapping("/{containerId}")
     fun getSpecificContainer(
             @PathVariable containerId: String
@@ -73,6 +68,9 @@ public class ServiceController(private val promptData: PromptData, private val d
                 .body(dockerService.getContainer(containerId))
     }
 
+    /**
+     * Starts a specific container
+     */
     @PostMapping("/{containerId}/start")
     fun startContainer(
             @PathVariable containerId: String,
@@ -86,6 +84,9 @@ public class ServiceController(private val promptData: PromptData, private val d
                 .body(dockerService.startContainer(containerId))
     }
 
+    /**
+     * Stop a specific container
+     */
     @PostMapping("/{containerId}/stop")
     fun stopContainer(
             @PathVariable containerId: String,
@@ -99,15 +100,10 @@ public class ServiceController(private val promptData: PromptData, private val d
                 .body(dockerService.stopContainer(containerId))
     }
 
-
-    /*TODO
-     * Check already created containers/images
-     * Network Configuration!!!
-     */
-
-    /*
+    /**
      * Method that handle the request of the user to build and create a container from a given dockerfile
      * It is used to attend the creation of a service
+     * TODO: Check already created containers/images
      */
 
     @PostMapping("/{chatId}")
@@ -130,6 +126,9 @@ public class ServiceController(private val promptData: PromptData, private val d
                 .body(returnVal)
     }
 
+    /**
+     * Auxiliary method to convert dockerfile into a Tar file in order to send it to the Docker Daemon
+     */
     fun createTarFile(dockerfileContent: ByteArray): File {
         // Create a temporary directory
         val tempDir = createTempDir()
@@ -154,6 +153,9 @@ public class ServiceController(private val promptData: PromptData, private val d
         return tarFile
     }
 
+    /**
+     * Auxiliary method to add files in a Tar file.
+     */
     private fun addFileToTar(tarOs: TarArchiveOutputStream, file: File, parentDir: String) {
         val entryName = parentDir + file.name
         val tarEntry = TarArchiveEntry(file, entryName)

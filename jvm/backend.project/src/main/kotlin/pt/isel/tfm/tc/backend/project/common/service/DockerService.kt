@@ -25,7 +25,7 @@ class DockerService(configProperties: DockerConfigProperties,database: Firestore
     @Autowired
     val firestore = database
 
-    /*
+    /**
      * Build an image with a given tar file
      */
 
@@ -44,7 +44,7 @@ class DockerService(configProperties: DockerConfigProperties,database: Firestore
         }
     }
 
-    /*
+    /**
      * Create a container with a given image name
      */
     fun createContainer(imageName:String,containerPort: Long): DockerBuildResponse? {
@@ -70,6 +70,11 @@ class DockerService(configProperties: DockerConfigProperties,database: Firestore
                 .body(DockerBuildResponse::class.java)
     }
 
+    /**
+     * Method used to detect the next port available in the Docker Daemon
+     * Can be improved :)
+     */
+
     fun getNextPortAvailable(): Long {
         val snap = firestore.collection("containers")
                 .orderBy("port",Query.Direction.DESCENDING)
@@ -88,7 +93,7 @@ class DockerService(configProperties: DockerConfigProperties,database: Firestore
 
     }
 
-    /*
+    /**
      * Starts a specific container
      */
     fun startContainer(containerID: String): String? {
@@ -101,7 +106,7 @@ class DockerService(configProperties: DockerConfigProperties,database: Firestore
                 .body(String::class.java)
     }
 
-    /*
+    /**
      * Stops a specific container
      */
     fun stopContainer(containerID: String): String? {
@@ -114,6 +119,10 @@ class DockerService(configProperties: DockerConfigProperties,database: Firestore
                 .body(String::class.java)
     }
 
+
+    /**
+     * Obtain the containers created by a user
+     */
 
     fun getUserContainers(chats: MutableList<Chat>): List<DockerContainer> {
         val client = HttpClients.createDefault()
@@ -142,6 +151,10 @@ class DockerService(configProperties: DockerConfigProperties,database: Firestore
         return returnValue
 
     }
+
+    /**
+     * Obtain a specific container
+     */
 
     fun getContainer(containerID: String): Container? {
         val client = HttpClients.createDefault()

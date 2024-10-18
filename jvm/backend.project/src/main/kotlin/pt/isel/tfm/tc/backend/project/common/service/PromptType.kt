@@ -2,6 +2,9 @@ package pt.isel.tfm.tc.backend.project.common.service
 
 import pt.isel.tfm.tc.backend.project.common.model.models.Message
 
+/**
+ * Prompt type enum, used to deliver slightly different prompts depending on the case.
+ */
 enum class PromptType {
     Honeypot {
         override fun buildMessages(): MutableList<Message> {
@@ -15,7 +18,7 @@ enum class PromptType {
     CTF {
         override fun buildMessages(): MutableList<Message> {
             val messages = mutableListOf<Message>()
-            messages.add(Message(systemRole, "You are a helpful assistant. You have to generate CTF challenges."))
+            messages.add(Message(systemRole, "You are a helpful assistant. You have to generate new CTF challenges to train cybersecurity students."))
             return messages
         }
 

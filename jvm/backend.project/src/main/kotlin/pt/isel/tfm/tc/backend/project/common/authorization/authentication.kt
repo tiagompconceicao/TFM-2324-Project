@@ -19,7 +19,7 @@ const val BEARER_SCHEME = "Bearer"
 
 
 /**
- * This is a sample filter that performs request logging.
+ * This is a sample filter that performs authentication verifications.
  */
 @Component
 class AuthenticationFilter(val userData: UserData): Filter {

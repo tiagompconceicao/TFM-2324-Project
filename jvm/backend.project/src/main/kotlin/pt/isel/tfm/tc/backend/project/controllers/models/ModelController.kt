@@ -32,8 +32,8 @@ public class ModelController(private val modelService: ModelService, private val
                 .body(ex.message)
     }
 
-    /*
-     * Test for the communication with Firebase
+    /**
+     * Obtain all chats own by the user
      */
 
     @GetMapping()
@@ -48,6 +48,9 @@ public class ModelController(private val modelService: ModelService, private val
 
     }
 
+    /**
+     * Obtain a specific chat created by the user
+     */
     @GetMapping("/{chatId}")
     fun getSpecificChat(
             @PathVariable chatId: String
@@ -59,15 +62,8 @@ public class ModelController(private val modelService: ModelService, private val
 
     }
 
-    /*
+    /**
      * Method that handle the request of the user to execute a prompt of a specific model
-     */
-
-    /*
-     *TODO
-     * Study the prompt Type, if it increases results or if it is really necessary
-     * For example, Malware analysis prompts won't expects a dockerfile
-     * This type of prompts may disable the retries mechanism
      */
 
     @PostMapping
@@ -119,6 +115,9 @@ public class ModelController(private val modelService: ModelService, private val
                 .body(outputModel)
     }
 
+    /**
+     * Method that sends the prompt to the LLM DAO, it also implements a retry mechanism in cases of timeouts or server failures
+     */
     fun buildOutput(chatId: String, modelAPI: ModelAPI, modelName: String, messages: MutableList<Message>, retriesLeft: Int, promptType: PromptType): OutputModel{
         if (retriesLeft == 0) throw Exception("Max retries surpassed")
         val outputModel: OutputModel
@@ -134,7 +133,9 @@ public class ModelController(private val modelService: ModelService, private val
         return outputModel
     }
 
-    //GPT-4 used for default clause
+    /**
+     * GPT-4 used for default clause
+     */
     fun getAPI(modelName: String): ModelAPI {
         return when(modelName){
             //Eventually add here other models auth
@@ -144,6 +145,9 @@ public class ModelController(private val modelService: ModelService, private val
         }
     }
 
+    /**
+     * Obtain the prompt type, the 'OTHER' type disables the retry mechanism
+     */
     fun getPromptType(promptType: String): PromptType {
         return when(promptType){
             //Eventually add here other models auth
