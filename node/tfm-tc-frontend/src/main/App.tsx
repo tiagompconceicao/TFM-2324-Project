@@ -53,12 +53,3 @@ function App() {
 }
 
 export default App
-
-
-/*
-<Route path="/tests" element={
-    <EnsureCredentials loginPageRoute={loginPageRoute}>
-      <Splash service={renderPromptsService()}/>
-    </EnsureCredentials>
-    }/>
-*/

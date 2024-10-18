@@ -23,25 +23,36 @@ type ContainersInfo = API.FetchInfo<Array<DockerContainer>>
 const Home = (props: PageProps) => {
   const navigate = useNavigate()
 
+  //List of prompts state
   const [promptsInfo, setPromptsInfo] = useState<PromptsInfo| undefined>()
+
+  //Selected prompt state
   const [currentPromptInfo, setCurrentPromptInfo] = useState<CurrentPromptInfo | undefined>()
 
+  //List of Containers state
   const [containersInfo, setContainersInfo] = useState<ContainersInfo| undefined>()
+
+  //Selected container state
   const [currentContainerInfo, setCurrentContainerInfo] = useState<Container | undefined>()
 
+  //States for updates purposes
   const [promptsUpdate, setpromptsUpdate] = useState<PromptsUpdate>()
   const [containersUpdate, setContainersUpdate] = useState<ContainersUpdate>()
 
+  //User input in text view
   const [inputValue, setInputValue] = useState('');
 
+  //LLM picker
   const [selectedModel, setSelectedModel] = useState<string>('gpt-4');
 
+  //Button states to distinguish which prompt or container is selected
   const [selectedButtonPrompts, setSelectedButtonPrompts] = useState<string>()
   const [selectedButtonServices, setSelectedButtonServices] = useState<string>()
 
-  //const [servicesInfo, setservicesInfo] = useState<ProjectsInfo | undefined>()
+
   const [uiMode, setuiMode] = useState<number>(1)
 
+  //Mechanism to update list of prompts and container each refresh
   useEffect(() => {
 
     async function getUserIdToken(){
@@ -85,12 +96,14 @@ const Home = (props: PageProps) => {
     sendContainersRequest()
   }, [props.service, promptsUpdate,containersUpdate])
 
+  //Access firebase user idToken
   async function getUserIdToken(){
     const user = getAuth().currentUser
     if (user == null||undefined) throw ("User not found")
     return await getIdToken(user,true)
   }
 
+  //Obtain user chat messages
   async function getChatMessages(id:string) {
     try {
       const result = await props.service.getChat(id,await getUserIdToken()).send()
@@ -106,7 +119,6 @@ const Home = (props: PageProps) => {
 
 
   //Sends the prompt to Backend and updates the currentPrompt state
-  //TODO case the currentPrompt is empty, create one
   async function sendChatMessage(message:string){
     let prompt: AddPromptModel = {
       text : message,
@@ -195,6 +207,7 @@ const Home = (props: PageProps) => {
       }
   }
 
+  //Opens new chat menos, unselecteds any pressed button
   async function newChat(){
     setSelectedButtonPrompts(undefined)
     setSelectedButtonServices(undefined)
@@ -202,37 +215,45 @@ const Home = (props: PageProps) => {
     setCurrentPromptInfo(undefined)
   }
 
+  //Logout
   const onLogoutClick = () => {
     getAuth().signOut()
     navigate("/login")
   }
 
+  //Text view input listener 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(event.target.value);
   };
 
+  //Enter button pressed handler in the text view
   const handleInputPressEnter = (event: React.KeyboardEvent<HTMLInputElement>) => {
     if (event.key === 'Enter') {
       handleSendText()
     }
   };
 
+  //Method to send user´s message to backend
   const handleSendText = () => {
     sendChatMessage(inputValue)
   }
 
+  //LLM picker
   const handlePickerChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     setSelectedModel(event.target.value);
   };
 
+  //Method to send default message to backend
   const createChatThroughSuggestion = (message: string) => {
     sendChatMessage(message)
   }
 
+  //Create container
   const createAndRenderContainer = (dockerfile:string|undefined) => {
     if(dockerfile !== undefined)
     createContainer(dockerfile)
   }
+
 
   const selectChat = (chatId: string | undefined) => {
     setSelectedButtonPrompts(chatId)
@@ -274,12 +295,11 @@ const Home = (props: PageProps) => {
     }
   };
 
+  //Method to automatically update visually the state of a selected container
   async function changeContainerState(id:string,state:ContainerAction){
     let currentContainer = JSON.parse(JSON.stringify(currentContainerInfo));
     let containersList = JSON.parse(JSON.stringify(containersInfo));
     
-    
-
     if(currentContainer !== undefined && currentContainer.state !== undefined && containersInfo?.result?.body !== undefined){
 
       const index = containersInfo?.result?.body.findIndex(item => item.id === id);
@@ -299,6 +319,7 @@ const Home = (props: PageProps) => {
     }
   }
 
+  //Obtain containers from the backend
   async function getContainers(){
     const result: API.Result<Array<DockerContainer>> = await props.service.getContainers(await getUserIdToken()).send()
       
@@ -309,6 +330,7 @@ const Home = (props: PageProps) => {
   }
 
 
+  //Create container in the backend
   async function createContainer(dockerfile:string) {
     try {
       let chatId = currentPromptInfo?.id
@@ -400,6 +422,7 @@ function renderChatOrSuggestions(mode:number,currentPrompts:CurrentPromptInfo | 
   )
 }
 
+//TODO: More advanced network management, the localhost address should not be hardcoded
 function renderContainerTab(currentContainer: Container | undefined,buttonCalback: (action:ContainerAction,containerId:string|undefined) => void): ReactNode{
   
   let hrefClassName = "behind-left-text"
@@ -468,6 +491,7 @@ function renderContainerTab(currentContainer: Container | undefined,buttonCalbac
   )
 }
 
+//Render default messages
 function renderSuggestions(createChatThroughSuggestion: (message: string) => void): ReactNode{
   return (
     <div className='SuggestionsDiv'>
@@ -489,8 +513,8 @@ function renderSuggestion(type:number, createChatThroughSuggestion: (message: st
     title = "Honeypot"
   } else {
     suggestion1 = "Generate a CTF about cracking a hash password"
-    suggestion2 = "Generate a nginx server with CVE-2021-23017"
-    suggestion3 = "Generate a nginx server with CVE-2019-9511"
+    suggestion2 = "Generate a CTF about Android vulnerabilities"
+    suggestion3 = "Generate a CTF"
     title = "CTF"
   }
   
@@ -516,6 +540,7 @@ function renderSuggestion(type:number, createChatThroughSuggestion: (message: st
   )
 }
 
+//Method used to render chat messages, it can render code snippets, dockerfiles and other specific representations.
 function renderChatDynamic(items: Array<Prompt> | undefined, launchContainerCallback: (dockerfile:string | undefined) => void) {
   if (items)
     return (

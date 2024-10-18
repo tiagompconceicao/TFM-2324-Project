@@ -2,7 +2,7 @@ import {Chat, Container, DockerContainer, Prompt} from './Model'
 import * as Fetch from '../common/FetchUtils'
 
 /**
- * Contract to be supported by the service used by the TestsPage.
+ * Contract to be supported by the service used by the Home Page.
  */
  export interface Service {
   addPrompt: (prompt:AddPromptModel, credentials?: string) => Fetch.Request<AddPromptOutputModel>
@@ -52,8 +52,10 @@ export type ModelContent = {
 }
 
 /**
- * An implementation of the tests service.
- * @param url       - the tests resource URL.
+ * An implementation of the home service.
+ * @param chatsUrl      - the chats resource URL.
+ * @param servicesUrl   - the services resource URL.
+ * @param pingUrl       - the ping resource URL.
  * @returns the newly instantiated service.
  */
 export function getService(chatsUrl: URL,servicesUrl:URL,pingUrl: URL): Service {
