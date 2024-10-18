@@ -14,3 +14,4 @@ The frontend allows the user to interact with the LLMs providing an user-friendl
 # Configuration
 
 In order to execute both server be aware to configure the LLMs API keys in the `jvm/backend.project/src/main/resources/application.properties` file.
+The API keys must replaced the dummy values marked as `Insert-here-%Something%-API-key`.
