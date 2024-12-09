@@ -1,6 +1,6 @@
 # Overview
 
-This repository stores both projects that integrates a Proof of Concept for my Master's thesis. Providing to the end user an LLM based tool with capabilities to generate and instantiate `Docker containers`. The main goal of this system is to simplify and speed up cybersecurity processes, such as the creation and management of honeypots.
+This repository stores the project that integrates a Proof of Concept for my Computer Science and Engineering MSc thesis in Instituto Superior de Engenharia de Lisboa. Providing to the end user an LLM based tool with capabilities to generate and instantiate `Docker containers`. The main goal of this system is to simplify and speed up cybersecurity processes, such as the creation and management of honeypots.
 
 
 # Organisation
